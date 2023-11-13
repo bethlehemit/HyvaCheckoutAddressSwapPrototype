@@ -1,0 +1,28 @@
+<config>
+    <preference for="Hyva\Checkout\Magewire\Checkout\AddressView\ShippingDetails"
+                type="SBS\Checkout\Magewire\Checkout\AddressView\ShippingDetails" />
+    <preference for="Hyva\Checkout\Magewire\Checkout\AddressView\BillingDetails"
+                type="SBS\Checkout\Magewire\Checkout\AddressView\BillingDetails" />
+
+    <type name="Hyva\Checkout\Model\Component\AddressTypeBilling">
+        <plugin name="sbs_checkout_address_type_billing"
+                type="SBS\Checkout\Model\Component\AddressTypeBillingPlugin"
+                sortOrder="1"
+                disabled="false" />
+    </type>
+
+    <preference for="Hyva\Checkout\Model\Component\AddressTypeShipping"
+                type="SBS\Checkout\Model\Component\AddressTypeShipping" />
+
+    <preference for="Hyva\Checkout\Model\Form\EntityFormSaveService\EavAttributeBillingAddress"
+                type="SBS\Checkout\Model\Form\EntityFormSaveService\EavAttributeBillingAddress" />
+    <preference for="Hyva\Checkout\Model\Form\EntityFormSaveService\EavAttributeShippingAddress"
+                type="SBS\Checkout\Model\Form\EntityFormSaveService\EavAttributeShippingAddress" />
+
+    <type name="Hyva\Checkout\Model\Magewire\Payment\AbstractPlaceOrderService">
+        <plugin name="sbs_checkout_register_account"
+                type="SBS\Checkout\Plugin\PlaceOrderServicePlugin"
+                sortOrder="1"
+                disabled="false" />
+    </type>
+</config>

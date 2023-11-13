@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <referenceBlock name="checkout.shipping-details">
+            <block name="checkout.shipping-details.address"
+                   template="SBS_Checkout::checkout/address-view/shipping-details/address.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.shipping-details" template="SBS_Checkout::checkout/address-view/shipping-details.phtml" />
+        <referenceBlock name="checkout.billing-details" template="SBS_Checkout::checkout/address-view/billing-details.phtml" />
+    </body>
+</page>

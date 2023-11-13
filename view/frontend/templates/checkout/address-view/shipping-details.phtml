@@ -1,0 +1,54 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2022-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var AddressView $addressView */
+/** @var Escaper $escaper */
+/** @var Magewire $magewire */
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Hyva\Checkout\ViewModel\Checkout\AddressView;
+use SBS\Checkout\Magewire\Checkout\AddressView\ShippingDetails as Magewire;
+
+$shippingAddressView = $viewModels->require(AddressView\AddressViewShipping::class);
+$billingAddressView = $viewModels->require(AddressView\AddressViewBilling::class);
+?>
+<div>
+    <?php if (! $billingAddressView->isVirtual()): ?>
+        <?php if ($magewire->pickupPointEnabled()): ?>
+            <span><?= $escaper->escapeHtml(__("To Pickup Point")) ?></span>
+        <?php else: ?>
+            <?php if (!$magewire->billingAsShipping): ?>
+                <?= /* @noEscape */ $shippingAddressView->renderView() ?>
+            <?php endif; ?>
+
+            <div class="flex items-start mb-6 mt-2 p-4 bg-gray-100 rounded-lg"
+                 wire:target="billingAsShipping"
+                 wire:loading.class="opacity-25"
+            >
+                <label class="inline-flex items-center" for="billing-as-shipping">
+                    <input id="billing-as-shipping"
+                           name="billing-as-shipping"
+                           type="checkbox"
+                           wire:model="billingAsShipping"
+                           wire:loading.attr="disabled"
+                    />
+
+                    <span class="ml-2 text-gray-700 font-bold hover:cursor-pointer">
+                        <?= $escaper->escapeHtml(__('My billing and shipping address are the same')) ?>
+                    </span>
+                </label>
+            </div>
+        <?php endif ?>
+    <?php endif ?>
+</div>

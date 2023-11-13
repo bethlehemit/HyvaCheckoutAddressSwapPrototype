@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+/** @var ViewModelRegistry $viewModels */
+/** @var AddressRenderer $addressRenderer */
+
+use Hyva\Checkout\ViewModel\Checkout\AddressRenderer;
+use Hyva\Theme\Model\ViewModelRegistry;
+
+$addressRenderer = $viewModels->require(AddressRenderer::class);
+?>
+<div>
+    <?php if ($addressRenderer->canRenderBillingAddress()): ?>
+        <address>
+            <?= /* @noEscape */ $addressRenderer->renderShippingAddress() ?>
+        </address>
+    <?php else: ?>
+        <!-- Shipping address placeholder -->
+    <?php endif ?>
+</div>
